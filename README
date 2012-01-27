@@ -1,0 +1,15 @@
+TODO:
+
+Create an app that allows us to: 
+
+1. login with a username and password - Done 
+2. and view a stream of tweets pertaining to a twitter handle associated with our user
+3. make sure you can't access the tweets page unless you're logged in - Done
+
+4. bonus one: ability to send tweets from a form as well
+
+5. bonus two: make sure the stream of tweets can't be viewed in any way, unless you're logged in (ex. you can't log out from one tab and still see them in another)
+
+6. update the UI to be user friendly and (just a tiny bit) attractive
+
+superbonus: make the app work for multiple users at the same time.

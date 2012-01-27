@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title of the document</title>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+
+  <body>
+    <div id=signin>
+      Login: <input type=text id=login>
+      Password: <input type=password id=password>
+      <input type=submit onclick=login()>
+    </div>
+    <div id=tweets style="display:none">
+      Tweets:
+    </div>
+  </body>
+
+  <script type=text/javascript>
+    function login()
+    {
+      var xhr = new XMLHttpRequest();
+      var login = $("#login").val();
+      var password = $("#password").val();
+      xhr.open("post", "/login.html?login=" + login + "&password=" + password, false);
+      xhr.send(null);
+
+      if(xhr.responseText.trim() === "Success")
+      {
+        $("#tweets").show();
+        var socket = io.connect('http://localhost');
+
+        socket.on('tweet', function(data) {
+          $("#tweets").prepend(data);
+        }
+      }
+    }
+  </script>
+
+</html> 
