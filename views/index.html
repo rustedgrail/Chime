@@ -11,7 +11,7 @@
 
   <body>
     <div id=signin>
-      Login: <input type=text id=login>
+      Login: <input type=text id=username>
       Password: <input type=password id=password>
       <input type=submit onclick=login()>
     </div>
@@ -24,9 +24,9 @@
     function login()
     {
       var xhr = new XMLHttpRequest();
-      var login = $("#login").val();
+      var username = $("#username").val();
       var password = $("#password").val();
-      xhr.open("post", "/login.html?login=" + login + "&password=" + password, false);
+      xhr.open("post", "/login.html?username=" + username + "&password=" + password, false);
       xhr.send(null);
 
       if(xhr.responseText.trim() === "Success")

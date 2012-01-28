@@ -1,0 +1,13 @@
+{
+    "name": "chime"
+  , "version": "0.0.1"
+  , "private": true
+  , "devDependencies": {
+    "coffee-script": "*"
+    , "jasmine-node": "*"
+  }
+  , "dependencies": {
+    "socket.io":  "*"
+    , "ntwitter": "*"
+  }
+}
