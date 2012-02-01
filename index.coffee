@@ -20,3 +20,6 @@ io.sockets.on 'connection', (socket) ->
     if logins[data.username] == data.password
       socket.emit 'success'
       Twitter.start socket
+
+    socket.on 'postTweet', (data) ->
+      Twitter.update data

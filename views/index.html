@@ -5,11 +5,17 @@
   </head>
 
   <body>
-    <div id=signin>
-      Login: <input type=text id=username>
-      Password: <input type=password id=password>
-      <input id=submit type=button value=login>
-    </div>
+    <div id=input>
+      <div id=signin>
+        Login: <input type=text id=username>
+        Password: <input type=password id=password>
+        <input id=submit type=button value=login>
+      </div>
+      <div id=post style="display:none">
+        Tweet: <input type=text id=postTweet>
+        <input id=submitTweet type=button value=Tweet>
+      </div>
+    <div>
     <div id=tweets style="display:none">
       Tweets:
       <div id=newTweets></div>
@@ -27,9 +33,15 @@
         socket.emit('connect', {username: $("#username").val(), password: $("#password").val()});
       }
 
+      function updateStatus()
+      {
+        socket.emit('postTweet', {tweet: $("#postTweet").val()});
+      }
+
       socket.on('success', function() {
         $("#tweets").show();
         $("#signin").hide();
+        $("#post").show();
 
         socket.on('tweet', function(data) {
           $("#newTweets").prepend('<br>');
@@ -38,6 +50,7 @@
       });
 
       $("#submit").click(login);
+      $("#submitTweet").click(updateStatus);
     </script>
   </body>
 </html> 
