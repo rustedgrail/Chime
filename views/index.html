@@ -28,36 +28,36 @@
       <div id=newTweets></div>
     </div>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-
-    <script type=text/javascript>
-      var socket = io.connect('http://localhost', {port: 8888});
-
-      function login()
-      {
-        "use strict";
-        socket.emit('connect', {username: $("#username").val(), password: $("#password").val()});
-      }
-
-      function updateStatus()
-      {
-        socket.emit('postTweet', {tweet: $("#postTweet").val()});
-      }
-
-      socket.on('success', function() {
-        $("#tweets").show();
-        $("#signin").hide();
-        $("#post").show();
-
-        socket.on('tweet', function(data) {
-          $("#newTweets").prepend('<br>');
-          $("#newTweets").prepend(data);
-        });
-      });
-
-      $("#submit").click(login);
-      $("#submitTweet").click(updateStatus);
-    </script>
   </body>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+
+  <script type=text/javascript>
+    var socket = io.connect('http://localhost', {port: 8888});
+
+    function login()
+    {
+      "use strict";
+      socket.emit('connect', {username: $("#username").val(), password: $("#password").val()});
+    }
+
+    function updateStatus()
+    {
+      socket.emit('postTweet', {tweet: $("#postTweet").val()});
+    }
+
+    socket.on('success', function() {
+      $("#tweets").show();
+      $("#signin").hide();
+      $("#post").show();
+
+      socket.on('tweet', function(data) {
+        $("#newTweets").prepend('<br>');
+        $("#newTweets").prepend(data);
+      });
+    });
+
+    $("#submit").click(login);
+    $("#submitTweet").click(updateStatus);
+  </script>
 </html> 

@@ -9,7 +9,7 @@ exports.Twitter = class Twitter
       access_token_secret: 'NHWGgA4XCrHkDSVlTfzKpJWizhOdaEsIsCOXJPPhTs'
 
     @start: (socket) ->
-      Twitter.twit.stream 'user', {track: 'funexpectnotreally'}, (stream) ->
+      Twitter.twit.stream 'user', {track: 'node'}, (stream) ->
         stream.on 'data', (data) ->
           text = data?.text
           user = data?.user?.screen_name
