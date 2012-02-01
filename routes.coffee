@@ -9,6 +9,7 @@ exports.Routes = class Routes
 
   @getPath: (rawUrl) ->
     parsedUrl = url.parse(rawUrl, true)
+    console.log rawUrl
 
     if parsedUrl.pathname == '/'
       './views/index.html'

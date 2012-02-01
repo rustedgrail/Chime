@@ -2,43 +2,53 @@
 <html>
   <head>
     <title>Title of the document</title>
-
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
-    </script>
-    <script src="/socket.io/socket.io.js"></script>
   </head>
 
   <body>
     <div id=signin>
       Login: <input type=text id=username>
       Password: <input type=password id=password>
-      <input type=submit onclick=login()>
+      <input id=submit type=button value=login>
     </div>
     <div id=tweets style="display:none">
       Tweets:
+      <div id=newTweets></div>
     </div>
-  </body>
 
-  <script type=text/javascript>
-    function login()
-    {
-      var xhr = new XMLHttpRequest();
-      var username = $("#username").val();
-      var password = $("#password").val();
-      xhr.open("post", "/login.html?username=" + username + "&password=" + password, false);
-      xhr.send(null);
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      console.log("Point 1");
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script>
+      console.log("Point 2");
+    </script>
 
-      if(xhr.responseText.trim() === "Success")
+    <script type=text/javascript>
+      function login()
       {
-        $("#tweets").show();
-        var socket = io.connect('http://localhost');
+        "use strict";
+        var xhr = new XMLHttpRequest();
+        var username = $("#username").val();
+        var password = $("#password").val();
+        xhr.open("post", "/login.html?username=" + username + "&password=" + password, false);
+        xhr.send(null);
 
-        socket.on('tweet', function(data) {
-          $("#tweets").prepend(data);
+        if(xhr.responseText.trim() === "Success")
+        {
+          $("#tweets").show();
+          var socket = io.connect('http://localhost:8888');
+
+          socket.on('tweet', function(data) {
+            console.log("Appending " + data);
+            console.log(data);
+            $("#newTweets").prepend('<br>');
+            $("#newTweets").prepend(data);
+          });
         }
       }
-    }
-  </script>
 
+      $("#submit").click(login);
+    </script>
+  </body>
 </html> 

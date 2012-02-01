@@ -11,7 +11,7 @@ exports.Twitter = class Twitter
     @start: (socket) ->
       @twit.stream 'user', {track: 'fun'}, (stream) ->
         stream.on 'data', (data) ->
-          socket.emit 'tweet', data
+          socket.emit 'tweet', " #{data.args[0].text} tweeted by #{data.args[0].user.screen_name}."
 
         stream.on 'end', (response) ->
           console.log response

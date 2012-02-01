@@ -1,25 +1,18 @@
-http = require('http')
-io = require('socket.io')
-
 Routes = require('./routes').Routes
 Twitter = require('./twitter').Twitter
 
-exports.Server = class Server
+onRequest = (request, response) ->
+  console.log "Request #{request.url}"
+  path = Routes.getPath request.url
+  console.log "Path #{path}"
+  Routes.writeResponse path, response
 
-  @onRequest: (request, response) ->
-    path = Routes.getPath request.url
-    Routes.writeResponse path, response
+app = require('http').createServer onRequest
+io = require('socket.io').listen app
 
-  @start: ->
-    port = process.env.PORT || 8888
-    app = http.createServer(@onRequest)
-    socket = io.listen(app)
-    app.listen port
+port = process.env.PORT || 8888
+app.listen port
 
-    Twitter.start socket
-
-    socket.sockets.on 'connection', (socket) ->
-      socket.emit 'tweet',
-        tweet: 'hello'
-
-Server.start()
+io.sockets.on 'connection', (socket) ->
+  socket.emit 'tweet', 'test'
+  #Twitter.start socket
