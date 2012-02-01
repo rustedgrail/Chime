@@ -4,20 +4,27 @@
     <title>Title of the document</title>
   </head>
 
-  <body>
-    <div id=input>
+  <body style="background-color:#5599cc; width: 750px">
+    <header style="width:100%">
+      <h1>Chime In!</h1>
+    </header>
+    <div id=input style="width: 300px; float:left">
       <div id=signin>
-        Login: <input type=text id=username>
-        Password: <input type=password id=password>
+        <p style="width: 100px">Login: </p><input type=text id=username>
+        <p style="width: 100px">Password: </p><input type=password id=password>
+        <br>
+        <br>
         <input id=submit type=button value=login>
       </div>
       <div id=post style="display:none">
-        Tweet: <input type=text id=postTweet>
+        <p style="width: 100px">Tweet: </p><input type=text id=postTweet>
+        <br>
+        <br>
         <input id=submitTweet type=button value=Tweet>
       </div>
-    <div>
-    <div id=tweets style="display:none">
-      Tweets:
+    </div>
+    <div id=tweets style="display:none; width: 450px; float:right">
+      <p style="width: 100px">Tweets: </p>
       <div id=newTweets></div>
     </div>
 
