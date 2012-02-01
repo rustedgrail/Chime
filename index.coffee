@@ -14,5 +14,5 @@ port = process.env.PORT || 8888
 app.listen port
 
 io.sockets.on 'connection', (socket) ->
-  socket.emit 'tweet', 'test'
-  #Twitter.start socket
+  #socket.emit 'tweet', 'test'
+  Twitter.start socket

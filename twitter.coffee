@@ -9,9 +9,11 @@ exports.Twitter = class Twitter
       access_token_secret: 'PmEEABgaYRv8tft31gXjIwqHcsBO74cYpduaCScW21c'
 
     @start: (socket) ->
-      @twit.stream 'user', {track: 'fun'}, (stream) ->
+      Twitter.twit.stream 'user', {track: 'fun'}, (stream) ->
         stream.on 'data', (data) ->
-          socket.emit 'tweet', " #{data.args[0].text} tweeted by #{data.args[0].user.screen_name}."
+          text = data?.text
+          user = data?.user?.screen_name
+          socket.emit 'tweet', "#{text} tweeted by #{user}." if text? and user?
 
         stream.on 'end', (response) ->
           console.log response
