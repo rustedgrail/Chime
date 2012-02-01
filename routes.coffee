@@ -9,7 +9,7 @@ exports.Routes = class Routes
 
   @getPath: (rawUrl) ->
     parsedUrl = url.parse(rawUrl, true)
-    console.log rawUrl
+    console.log "URL #{rawUrl}"
 
     if parsedUrl.pathname == '/'
       './views/index.html'
@@ -23,6 +23,7 @@ exports.Routes = class Routes
   @writeResponse: (path, response) ->
     fs.readFile path, (err, data) ->
       try
+        console.log "Writing #{path}"
         contentType = FileTypes[Routes.getExtension(path)]
         response.writeHead 200,
           "Content-Type": contentType

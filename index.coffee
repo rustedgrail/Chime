@@ -1,6 +1,8 @@
 Routes = require('./routes').Routes
 Twitter = require('./twitter').Twitter
 
+logins = require './logins'
+
 onRequest = (request, response) ->
   console.log "Request #{request.url}"
   path = Routes.getPath request.url
@@ -14,5 +16,7 @@ port = process.env.PORT || 8888
 app.listen port
 
 io.sockets.on 'connection', (socket) ->
-  #socket.emit 'tweet', 'test'
-  Twitter.start socket
+  socket.on 'connect', (data) ->
+    if logins[data.username] == data.password
+      socket.emit 'success'
+      Twitter.start socket
